@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import Phaser from "phaser";
+import "../../helper/WebFontLoader";
 
 import style from "./index.module.css";
 import { Preload } from "./scenes/preload";

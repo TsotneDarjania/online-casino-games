@@ -1,5 +1,9 @@
+import { Main } from "../scenes/main";
+
 export class Indicators extends Phaser.GameObjects.Container {
   spinButton!: Phaser.GameObjects.Image;
+  increaseButton!: Phaser.GameObjects.Image;
+  decreaseButton!: Phaser.GameObjects.Image;
 
   screenWidth!: number;
   screenHeight!: number;
@@ -16,14 +20,45 @@ export class Indicators extends Phaser.GameObjects.Container {
 
     this.addBackground();
     this.addSpinButton();
+    this.addIncreaaseButton();
+    this.addDecreaseButton();
+
+    this.addBetText();
+  }
+
+  addBetText() {
+    this.scene.add.text(130, this.screenHeight - 64, "0.10", {
+      align: "center",
+      fontFamily: "mainfont",
+      color: "white",
+      fontSize: "30px",
+      fixedWidth: 120,
+      fixedHeight: 30,
+    });
+  }
+
+  addIncreaaseButton() {
+    this.increaseButton = this.scene.add
+      .image(100, this.screenHeight - 50, "arrowButton")
+      .setScale(0.6)
+      .setFlip(true, false)
+      .setInteractive({ cursor: "pointer" });
+  }
+
+  addDecreaseButton() {
+    this.decreaseButton = this.scene.add
+      .image(280, this.screenHeight - 50, "arrowButton")
+      .setScale(0.6)
+      .setInteractive({ cursor: "pointer" });
   }
 
   addBackground() {
     const background = this.scene.add
-      .image(0, this.screenHeight - 100, "white")
-      .setDisplaySize(this.screenWidth, 100)
+      .image(0, this.screenHeight - 105, "white")
+      .setDisplaySize(this.screenWidth, 105)
       .setOrigin(0)
-      .setTint(0x271c4d);
+      .setAlpha(0.7)
+      .setTint(0x3d291b);
 
     this.add(background);
   }
@@ -31,8 +66,12 @@ export class Indicators extends Phaser.GameObjects.Container {
   addSpinButton() {
     this.spinButton = this.scene.add
       .image(this.screenWidth / 2, this.screenHeight - 50, "spinButton")
-      .setScale(1.2)
-      .setInteractive({ cursor: "pointer" });
+      .setScale(0.9)
+      .setInteractive({ cursor: "pointer" })
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        const scene = this.scene as Main;
+        scene.board.spin();
+      });
 
     this.add(this.spinButton);
   }
