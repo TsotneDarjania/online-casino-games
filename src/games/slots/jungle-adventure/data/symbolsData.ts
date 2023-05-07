@@ -1,36 +1,36 @@
 export const symbolsData = {
   tiger: {
-    key: "tiger",
+    key: "symbol-tiger",
   },
   lion: {
-    key: "lion",
+    key: "symbol-lion",
   },
   monkey: {
-    key: "monkey",
+    key: "symbol-monkey",
   },
   banana: {
-    key: "banana",
+    key: "symbol-banana",
   },
   coconut: {
-    key: "coconut",
+    key: "symbol-coconut",
   },
   ananas: {
-    key: "ananas",
+    key: "symbol-ananas",
   },
   binocular: {
-    key: "binocular",
+    key: "symbol-binocular",
   },
   compass: {
-    key: "compass",
+    key: "symbol-compass",
   },
   rope: {
-    key: "rope",
+    key: "symbol-rope",
   },
   traveller: {
-    key: "traveller",
+    key: "symbol-traveller",
   },
   treasure: {
-    key: "treasure",
+    key: "symbol-treasure",
   },
 };
 

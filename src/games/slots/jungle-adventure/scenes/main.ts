@@ -6,6 +6,7 @@ export class Main extends Phaser.Scene {
   screenHeight!: number;
 
   board!: Board;
+  indicators !: Indicators;
 
   constructor() {
     super("Main");
@@ -19,7 +20,7 @@ export class Main extends Phaser.Scene {
     this.addFrame();
 
     this.board = new Board(this, 120, 70);
-    new Indicators(this, 0, 0);
+    this.indicators = new Indicators(this, 0, 0);
   }
 
   addBackground() {
