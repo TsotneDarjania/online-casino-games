@@ -1,34 +1,68 @@
-import { getRandomFloat } from "../../../../helper/tatukaMath";
-import { symbolsData } from "../data/symbolsData";
-import { Symbol } from "./symbol";
+import { Column } from "./column";
 
-export class Board {
-  nextSymbols: Array<Symbol> = [];
-  currentColumns = [];
+export class Board extends Phaser.GameObjects.Layer {
+  currentColumns: Array<Column> = [];
+  nextColumns: Array<Column> = [];
+
+  paddingX = 160;
 
   constructor(public scene: Phaser.Scene, public x: number, public y: number) {
+    super(scene);
     this.init();
   }
 
   init() {
-
+    this.createCurrentColumns();
+    this.createNextColumns();
   }
 
-  createColumns(numberOfColumn:number,paddingX:number){
-    const column = []
-    for (let symbolIndex = 0; symbolIndex < numberOfColumn; symbolIndex++) {
-  
-        
-    }
+  spinAllColumns() {
+    this.spinColumn(0);
+  }
 
+  spinColumn(columnIndex: number) {
+    //current8
+    this.scene.add.tween({
+      targets: this.currentColumns[columnIndex],
+      duration: 1000,
+      y: 650,
+      onComplete: () => {
+        this.currentColumns[columnIndex].removeAll(true);
+        this.currentColumns[columnIndex] = this.nextColumns[columnIndex];
+        // this.currentColumns[columnIndex].setVisible(false);
+      },
+    });
 
-    for (let i = 0; i < Object.keys(symbolsData).length; i++) {
-      for (let j = 0; j < 3; j++) {
-  
-        
-      }
-      
+    //next
+    this.scene.add.tween({
+      targets: this.nextColumns[columnIndex],
+      duration: 1200,
+      y: 155,
+      onComplete: () => {
+        this.createNextColumns();
+      },
+    });
+  }
+
+  createNextColumns() {
+    let posX = this.x;
+    for (let i = 0; i < 5; i++) {
+      const column = this.createColumn(posX, this.y - 490);
+      this.nextColumns[i] = column;
+      posX += this.paddingX;
     }
-    //this.currentColumns.push(new Symbol(this.scene,100,100,symbolsData.ananas.key))
+  }
+
+  createCurrentColumns() {
+    let posX = this.x;
+    for (let i = 0; i < 5; i++) {
+      const column = this.createColumn(posX, this.y);
+      this.currentColumns.push(column);
+      posX += this.paddingX;
+    }
+  }
+
+  createColumn(x: number, y: number) {
+    return new Column(this.scene, x, y);
   }
 }
