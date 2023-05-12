@@ -1,3 +1,5 @@
+import { screenSize } from "../config/layoutConfig";
+
 export class Symbol extends Phaser.GameObjects.Container {
   background!: Phaser.GameObjects.Image;
 
@@ -45,7 +47,11 @@ export class Symbol extends Phaser.GameObjects.Container {
   addBackground() {
     this.background = this.scene.add
       .image(0, 0, "symbol-background")
-      .setTint(0x848c91)
+      .setTint(0xc666d1)
+      .setDisplaySize(
+        screenSize().board.symbol.legnth,
+        screenSize().board.symbol.legnth
+      )
       .setOrigin(0);
 
     this.add(this.background);

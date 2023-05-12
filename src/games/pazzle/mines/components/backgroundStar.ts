@@ -21,8 +21,8 @@ export class BackgroundStar extends Phaser.GameObjects.Image {
     this.screenWidth = this.scene.game.canvas.width;
     this.screenHeight = this.scene.game.canvas.height;
     this.scale = 0;
-    this.setAlpha(0.5);
-    this.setTint(0x202224);
+    this.setAlpha(0.2);
+    this.setTint(0xe0dc65);
 
     this.addAnimation();
   }

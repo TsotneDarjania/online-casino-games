@@ -168,7 +168,7 @@ export class GameManager {
       this.clickMinesButton();
     });
     const mineButton = this.scene.interface.mineButton.node as HTMLElement;
-    mineButton.style.backgroundColor = "#403E3C";
+    mineButton.style.backgroundColor = "#776D8F";
   }
 
   increaseBet() {

@@ -1,4 +1,5 @@
 import { gameDataConfig } from "../config/gameDataConfig";
+import { screenSize } from "../config/layoutConfig";
 import { IndicatorBar } from "../gameObjects/indicatorBar";
 import { Main } from "../scenes/main";
 
@@ -157,9 +158,13 @@ export class Interface extends Phaser.GameObjects.Layer {
     this.mineButton = this.scene.add
       .dom(
         this.screenWidth / 2,
-        40,
+        screenSize().minesButton.y,
         "button",
-        "padding : 4px 40px;  cursor : pointer;font-size : 13px; font-weight : bold; color : #F2EDE4; background-color : #403E3C; border : 2px solid #63615D",
+        `width : ${screenSize().minesButton.width}px; height : ${
+          screenSize().minesButton.height
+        }px; cursor : pointer;font-size : ${
+          screenSize().minesButton.fontSize
+        }px; font-weight : bold; color : #F2EDE4; background-color : #776D8F; border : none; border: 3px solid #3E384A;`,
         `Mines : ${gameDataConfig.mines}`
       )
       .setInteractive();
@@ -168,13 +173,13 @@ export class Interface extends Phaser.GameObjects.Layer {
 
   addNextBalance() {
     this.nextText = this.scene.add.text(
-      this.screenWidth - 230,
-      50,
+      this.screenWidth + screenSize().nextText.x,
+      screenSize().nextText.y,
       "NEXT 0 USD",
       {
         align: "center",
         color: "#FEF9F0",
-        fontSize: 16,
+        fontSize: screenSize().nextText.fontSize,
         shadow: {
           offsetX: 1,
           offsetY: 1,
@@ -192,15 +197,15 @@ export class Interface extends Phaser.GameObjects.Layer {
 
   addTotalBalanceText() {
     this.totalBalanceText = this.scene.add.text(
-      this.screenWidth - 230,
-      20,
+      this.screenWidth + screenSize().totalBalanceText.x,
+      screenSize().totalBalanceText.y,
       `TOTAL ${gameDataConfig.user.totalBalance.toFixed(2)} ${
         gameDataConfig.user.currency
       }`,
       {
         align: "center",
         color: "#FA7057",
-        fontSize: 20,
+        fontSize: screenSize().totalBalanceText.fontSize,
         shadow: {
           offsetX: 1,
           offsetY: 1,

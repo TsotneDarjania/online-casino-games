@@ -1,4 +1,5 @@
 import { getRandomFloat } from "../../../../helper/tatukaMath";
+import { screenSize } from "../config/layoutConfig";
 import { Symbol } from "../gameObjects/symbol";
 import { Main } from "../scenes/main";
 
@@ -18,7 +19,7 @@ export default class Board extends Phaser.GameObjects.Container {
   }
 
   addSymbols() {
-    const padding = 70;
+    const padding = screenSize().board.padding;
     let posX = 0;
     let posY = 0;
 
@@ -60,7 +61,7 @@ export default class Board extends Phaser.GameObjects.Container {
 
   makeDeactive() {
     this.allSymbol.forEach((symbol) => {
-      symbol.background.setTint(0x848c91);
+      symbol.background.setTint(0xc666d1);
       symbol.background.disableInteractive();
 
       symbol.correctSymbol.setVisible(false);

@@ -1,3 +1,4 @@
+import { screenSize } from "../config/layoutConfig";
 import { Main } from "../scenes/main";
 
 export class IndicatorBar extends Phaser.GameObjects.Container {
@@ -21,21 +22,28 @@ export class IndicatorBar extends Phaser.GameObjects.Container {
 
   addBackground() {
     this.background = this.scene.add
-      .image(this.mainScene.screenWidth / 2, 100, "white")
+      .image(
+        this.mainScene.screenWidth / 2,
+        screenSize().indicatorBar.background.y,
+        "white"
+      )
       .setOrigin(0.5)
-      .setDisplaySize(this.mainScene.board.getBounds().width, 14)
-      .setTint(0x535b5c);
+      .setDisplaySize(
+        this.mainScene.board.getBounds().width,
+        screenSize().indicatorBar.background.height
+      )
+      .setTint(0x010617);
   }
 
   addFill() {
     this.fill = this.scene.add
       .image(
         this.mainScene.screenWidth / 2 - this.background.displayWidth / 2,
-        100,
+        screenSize().fill.y,
         "white"
       )
       .setOrigin(0, 0.5)
-      .setDisplaySize(0, 14)
-      .setTint(0xa9ffe3);
+      .setDisplaySize(0, screenSize().fill.height)
+      .setTint(0x15dc65);
   }
 }

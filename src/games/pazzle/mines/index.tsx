@@ -5,6 +5,7 @@ import "../../helper/WebFontLoader";
 import style from "./index.module.css";
 import { Preload } from "./scenes/preload";
 import { Main } from "./scenes/main";
+import { screenSize } from "./config/layoutConfig";
 
 const Mines = () => {
   const canvasContainer = useRef(null);
@@ -20,10 +21,10 @@ const Mines = () => {
       type: Phaser.AUTO,
       scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 900,
-        height: 600,
+        width: screenSize().canvas.width,
+        height: screenSize().canvas.height,
       },
-      backgroundColor: 0x34353b,
+      backgroundColor: 0x372652,
       scene: [Preload, Main],
     });
 
