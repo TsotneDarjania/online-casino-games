@@ -70,7 +70,7 @@ export class Indicators extends Phaser.GameObjects.Container {
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         const scene = this.scene as Main;
-        scene.board.spin();
+        scene.board.spinAllColumns();
       });
 
     this.add(this.spinButton);

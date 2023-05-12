@@ -4,7 +4,6 @@ export class Symbol extends Phaser.GameObjects.Container {
 
   constructor(scene: Phaser.Scene, x: number, y: number, public key: string) {
     super(scene, x, y);
-    this.setVisible(false);
 
     this.createRectangle();
     this.createImage();
