@@ -6,11 +6,14 @@ export class GameManager {
   mines!: number;
   betIndex!: number;
   totalBalance!: number;
-  cashOutBalance: number = 0;
+  cashOutBalance = 0;
 
-  nextAmount: number = 0;
+  fillIndicatorPercent = 0;
+
+  nextAmount = 0;
 
   correctAnswerBonus = 0;
+  minesBonus = 0;
 
   constructor(public scene: Main, public config: GameDataConfig) {
     this.mines = config.mines;
@@ -22,12 +25,18 @@ export class GameManager {
 
   init() {
     this.addEventListeners();
+    this.minesBonus = calculatePercentage(
+      8 + this.mines * 3,
+      this.config.bets[this.betIndex]
+    );
     this.calculateNextAmount();
   }
 
   addCorrectAnswer() {
     this.calculateCashOutBalace();
+    this.minesBonus += calculatePercentage(this.mines * 2, this.cashOutBalance);
     this.calculateNextAmount();
+    this.updateFillIndicatorBar();
 
     this.correctAnswerBonus += calculatePercentage(12, this.cashOutBalance);
 
@@ -37,7 +46,34 @@ export class GameManager {
     }
   }
 
-  loose() {}
+  loose() {
+    this.totalBalance -= this.config.bets[this.betIndex];
+    this.updateTotalBalanceText(this.totalBalance);
+
+    this.scene.board.allSymbol.forEach((symbol) => {
+      symbol.background.disableInteractive();
+    });
+
+    setTimeout(() => {
+      this.scene.board.showAllSymbolValues();
+    }, 1000);
+
+    setTimeout(() => {
+      this.reset();
+    }, 2500);
+  }
+
+  updateFillIndicatorBar() {
+    const steps = 25 - this.mines;
+
+    this.fillIndicatorPercent +=
+      this.scene.interface.fillIndicatorBar.background.displayWidth / steps;
+
+    this.scene.interface.fillIndicatorBar.fill.setDisplaySize(
+      this.fillIndicatorPercent,
+      this.scene.interface.fillIndicatorBar.background.displayHeight
+    );
+  }
 
   calculateCashOutBalace() {
     this.cashOutBalance = this.nextAmount;
@@ -93,8 +129,19 @@ export class GameManager {
   }
 
   reset() {
+    this.fillIndicatorPercent = 0;
+    this.scene.interface.fillIndicatorBar.fill.setDisplaySize(
+      0,
+      this.scene.interface.fillIndicatorBar.background.displayHeight
+    );
+
     this.correctAnswerBonus = 0;
-    this.updateNextText(this.config.bets[this.betIndex]);
+    this.minesBonus = calculatePercentage(
+      8 + this.mines * 3,
+      this.config.bets[this.betIndex]
+    );
+    this.calculateNextAmount();
+
     this.scene.board.makeDeactive();
     this.scene.board.bombs = [];
 
@@ -128,7 +175,9 @@ export class GameManager {
     if (this.config.bets.length > this.betIndex + 1) {
       this.betIndex += 1;
     }
-    this.updateBetText(this.config.bets[this.betIndex]);
+    const bet = this.config.bets[this.betIndex];
+    this.minesBonus = calculatePercentage(8 + this.mines * 3, bet);
+    this.updateBetText(bet);
     this.calculateNextAmount();
   }
 
@@ -136,12 +185,18 @@ export class GameManager {
     if (this.betIndex > 0) {
       this.betIndex -= 1;
     }
-    this.updateBetText(this.config.bets[this.betIndex]);
+    const bet = this.config.bets[this.betIndex];
+    this.minesBonus = calculatePercentage(8 + this.mines * 3, bet);
+    this.updateBetText(bet);
     this.calculateNextAmount();
   }
 
   changeBet(betIndex: number) {
     this.betIndex = betIndex;
+    this.minesBonus = calculatePercentage(
+      8 + this.mines * 3,
+      this.config.bets[this.betIndex]
+    );
     this.updateBetText(this.config.bets[this.betIndex]);
     this.calculateNextAmount();
   }
@@ -155,6 +210,10 @@ export class GameManager {
 
   changMinesNumber(mines: number) {
     this.mines = mines;
+    this.minesBonus = calculatePercentage(
+      8 + this.mines * 3,
+      this.config.bets[this.betIndex]
+    );
     this.calculateNextAmount();
   }
 
@@ -181,11 +240,7 @@ export class GameManager {
 
   calculateNextAmount() {
     const bet: number = this.config.bets[this.betIndex];
-
-    this.nextAmount =
-      bet + calculatePercentage(8 + this.mines, bet) + this.correctAnswerBonus;
-    console.log(this.nextAmount);
-
+    this.nextAmount = bet + this.minesBonus + this.correctAnswerBonus;
     this.updateNextText(this.nextAmount);
   }
 
@@ -196,6 +251,9 @@ export class GameManager {
     this.scene.board.makeActive();
     this.totalBalance = this.totalBalance - this.config.bets[this.betIndex];
     this.updateTotalBalanceText(this.totalBalance);
+
+    this.scene.interface.betOptionsModal.setVisible(false);
+    this.scene.interface.minesOptionModal.setVisible(false);
 
     //deactive other interface buttons
     this.scene.interface.betButton.disableInteractive();

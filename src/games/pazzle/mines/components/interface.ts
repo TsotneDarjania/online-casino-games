@@ -144,6 +144,8 @@ export class Interface extends Phaser.GameObjects.Layer {
       childButton.addListener("click");
       childButton.on("click", () => {
         const value = (childButton.node as HTMLInputElement).innerHTML;
+        this.minesOptionModal.setVisible(false);
+        this.mineButton.setText("Mines : " + value);
         this.scene.gameManager.changMinesNumber(Number(value));
       });
       this.minesOptionModal.node.appendChild(childButton.node);

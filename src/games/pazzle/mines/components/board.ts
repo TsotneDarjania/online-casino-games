@@ -73,7 +73,18 @@ export default class Board extends Phaser.GameObjects.Container {
     });
   }
 
+  showAllSymbolValues() {
+    for (let i = 0; i < this.allSymbol.length; i++) {
+      if (this.bombs.includes(i)) {
+        this.allSymbol[i].showWrongAnswer();
+      } else {
+        this.allSymbol[i].showCorrectAnswer();
+      }
+    }
+  }
+
   clickSymbol(symbolIndex: number, symbol: Symbol) {
+    symbol.background.disableInteractive();
     if (this.bombs.includes(symbolIndex)) {
       symbol.showWrongAnswer();
       this.scene.gameManager.loose();
