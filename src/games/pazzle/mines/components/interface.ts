@@ -36,7 +36,10 @@ export class Interface extends Phaser.GameObjects.Layer {
     this.screenWidth = this.scene.game.canvas.width;
     this.screenHeight = this.scene.game.canvas.height;
 
-    this.bottomIndicators = this.scene.add.container(0, this.screenHeight - 50);
+    this.bottomIndicators = this.scene.add.container(
+      0,
+      this.screenHeight + screenSize().bottomIndicators.y
+    );
 
     //bottom interface
     this.addBetText();
@@ -57,7 +60,7 @@ export class Interface extends Phaser.GameObjects.Layer {
     //correct bottom indicator positions
     this.bottomIndicators.setPosition(
       this.screenWidth / 2 - this.bottomIndicators.getBounds().width / 2,
-      this.screenHeight - 50
+      this.screenHeight + screenSize().bottomIndicators.y
     );
   }
 
@@ -84,7 +87,7 @@ export class Interface extends Phaser.GameObjects.Layer {
     this.betOptionsModal = this.scene.add
       .dom(
         this.screenWidth / 2,
-        this.screenHeight - 190,
+        this.screenHeight + screenSize().betOptionsModal.y,
         "div",
         "width : " +
           this.bottomIndicators.getBounds().width +

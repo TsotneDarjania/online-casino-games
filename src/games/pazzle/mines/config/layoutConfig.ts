@@ -36,6 +36,12 @@ export const layoutConfig = {
       y: 50,
       fontSize: 16,
     },
+    bottomIndicators: {
+      y: -50,
+    },
+    betOptionsModal: {
+      y: -190,
+    },
   },
   mobile: {
     canvas: {
@@ -73,6 +79,12 @@ export const layoutConfig = {
       x: -330,
       y: 150,
       fontSize: 15,
+    },
+    bottomIndicators: {
+      y: -100,
+    },
+    betOptionsModal: {
+      y: -240,
     },
   },
 };
