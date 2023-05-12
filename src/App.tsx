@@ -1,7 +1,12 @@
 import "./App.css";
+import Mines from "./games/pazzle/mines";
 
 function App() {
-  return <>auydgasuydg</>;
+  return (
+    <>
+      <Mines />
+    </>
+  );
 }
 
 export default App;
