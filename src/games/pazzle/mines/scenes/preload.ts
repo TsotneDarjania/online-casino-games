@@ -13,6 +13,7 @@ export class Preload extends Phaser.Scene {
     this.load.image("plus", "images/plus.png");
     this.load.image("bet-option-button", "images/database.png");
     this.load.image("bet-button", "images/bet-button.png");
+    this.load.image("cash-out-image", "images/cash.png");
 
     this.load.image("white", "images/white.png");
   }

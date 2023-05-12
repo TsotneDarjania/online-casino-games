@@ -19,7 +19,11 @@ export class Symbol extends Phaser.GameObjects.Container {
 
   createCorrectSymbol() {
     this.correctSymbol = this.scene.add
-      .image(0, 0, "background-star")
+      .image(
+        this.getBounds().width / 2,
+        this.getBounds().height / 2,
+        "background-star"
+      )
       .setTint(0xffe08b)
       .setVisible(false)
       .setAlpha(0)
@@ -30,7 +34,7 @@ export class Symbol extends Phaser.GameObjects.Container {
 
   createWrongSymbol() {
     this.wrongSymbol = this.scene.add
-      .image(0, 0, "bomb")
+      .image(this.getBounds().width / 2, this.getBounds().height / 2, "bomb")
       .setVisible(false)
       .setAlpha(0)
       .setScale(0);
@@ -42,9 +46,7 @@ export class Symbol extends Phaser.GameObjects.Container {
     this.background = this.scene.add
       .image(0, 0, "symbol-background")
       .setTint(0x848c91)
-      .setOrigin(0)
-      .setInteractive({ cursor: "pointer" })
-      .on(Phaser.Input.Events.POINTER_DOWN, () => {});
+      .setOrigin(0);
 
     this.add(this.background);
   }

@@ -35,7 +35,7 @@ export class IndicatorBar extends Phaser.GameObjects.Container {
         "white"
       )
       .setOrigin(0, 0.5)
-      .setDisplaySize(30, 14)
+      .setDisplaySize(0, 14)
       .setTint(0xa9ffe3);
   }
 }
