@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import JunkgleAdventure from "./games/slots/jungle-adventure/index.tsx";
 import Mines from "./games/pazzle/mines/index.tsx";
 
+console.log("main tsx");
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Router>
     <Routes>
