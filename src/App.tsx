@@ -8,8 +8,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Mines />} />
-        <Route path="jungle" element={<JunkgleAdventure />} />
-        <Route path="mines" element={<Mines />} />
+        <Route path="/jungle" element={<JunkgleAdventure />} />
+        <Route path="/mines" element={<Mines />} />
       </Routes>
     </Router>
   );

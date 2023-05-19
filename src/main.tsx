@@ -9,8 +9,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Router>
     <Routes>
       <Route path="/" element={<Mines />} />
-      <Route path="jungle" element={<JunkgleAdventure />} />
-      <Route path="mines" element={<Mines />} />
+      <Route path="/jungle" element={<JunkgleAdventure />} />
+      <Route path="/mines" element={<Mines />} />
     </Routes>
   </Router>
 );
