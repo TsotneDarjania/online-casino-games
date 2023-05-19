@@ -71,8 +71,32 @@ export class Indicators extends Phaser.GameObjects.Container {
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         const scene = this.scene as Main;
         scene.board.spinAllColumns();
+
+        this.desableInterface();
       });
 
     this.add(this.spinButton);
+  }
+
+  desableInterface() {
+    this.spinButton.setTint(0x919399);
+    this.spinButton.disableInteractive();
+
+    this.increaseButton.setTint(0x919399);
+    this.increaseButton.disableInteractive();
+
+    this.decreaseButton.setTint(0x919399);
+    this.decreaseButton.disableInteractive();
+  }
+
+  enableInterface() {
+    this.spinButton.setTint(0xffffff);
+    this.spinButton.setInteractive();
+
+    this.increaseButton.setTint(0xffffff);
+    this.increaseButton.setInteractive();
+
+    this.decreaseButton.setTint(0xffffff);
+    this.decreaseButton.setInteractive();
   }
 }
