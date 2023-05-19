@@ -8,11 +8,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Mines />} />
-        <Route
-          path="/games/slots/jungle-adventure"
-          element={<JunkgleAdventure />}
-        />
-        <Route path="/games/puzzle/mines" element={<Mines />} />
+        <Route path="jungle" element={<JunkgleAdventure />} />
+        <Route path="mines" element={<Mines />} />
       </Routes>
     </Router>
   );
