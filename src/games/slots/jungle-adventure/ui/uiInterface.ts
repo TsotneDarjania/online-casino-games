@@ -53,14 +53,16 @@ export class UiInterface extends Phaser.GameObjects.Container {
   }
 
   addBetText() {
-    this.scene.add.text(130, this.screenHeight - 64, "0.10", {
-      align: "center",
-      fontFamily: "mainfont",
-      color: "white",
-      fontSize: "30px",
-      fixedWidth: 120,
-      fixedHeight: 30,
-    });
+    this.scene.add
+      .text(130, this.screenHeight - 64, "0.10", {
+        align: "center",
+        fontFamily: "mainfont",
+        color: "white",
+        fontSize: "30px",
+        fixedWidth: 120,
+        fixedHeight: 30,
+      })
+      .setVisible(false);
   }
 
   addIncreaaseButton() {
@@ -68,6 +70,7 @@ export class UiInterface extends Phaser.GameObjects.Container {
       .image(100, this.screenHeight - 50, "arrowButton")
       .setScale(0.6)
       .setFlip(true, false)
+      .setVisible(false)
       .setInteractive({ cursor: "pointer" });
   }
 
@@ -75,6 +78,7 @@ export class UiInterface extends Phaser.GameObjects.Container {
     this.decreaseButton = this.scene.add
       .image(280, this.screenHeight - 50, "arrowButton")
       .setScale(0.6)
+      .setVisible(false)
       .setInteractive({ cursor: "pointer" });
   }
 
