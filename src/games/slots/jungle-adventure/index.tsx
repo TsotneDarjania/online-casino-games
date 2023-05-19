@@ -24,7 +24,7 @@ const JunkgleAdventure = () => {
         width: 1200,
         height: 750,
       },
-      backgroundColor: 0x1c1c1f,
+      backgroundColor: 0x2e2f30,
       scene: [Preload, Main],
     });
 

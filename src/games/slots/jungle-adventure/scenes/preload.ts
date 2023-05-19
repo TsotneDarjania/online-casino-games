@@ -15,6 +15,7 @@ export class Preload extends Phaser.Scene {
     //ui
     this.load.image("spinButton", "images/ui/spin.png");
     this.load.image("arrowButton", "images/ui/arrow.png");
+    this.load.image("options-icon", "images/ui/options.png");
 
     //gameplat
     this.load.image("gameplayBackground", "images/background.jpg");

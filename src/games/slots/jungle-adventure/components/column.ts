@@ -4,26 +4,42 @@ import { Symbol } from "./symbol";
 
 export class Column extends Phaser.GameObjects.Container {
   paddingY: number = 80;
-  constructor(public scene: Phaser.Scene, x: number, y: number) {
+  constructor(
+    public scene: Phaser.Scene,
+    x: number,
+    y: number,
+    public isRandom: boolean
+  ) {
     super(scene, x, y);
     this.scene.add.existing(this);
     this.init();
   }
   init() {
-    this.createAllSymbols();
+    this.isRandom && this.createRandomColumn();
   }
 
-  createSymbol(positionY: number, imageKey: string) {
-    const symbol = new Symbol(this.scene, 0, positionY, imageKey);
-    this.add(symbol);
-  }
-
-  createAllSymbols() {
+  createRandomColumn() {
     let positionY = 0;
     for (let index = 0; index < 3; index++) {
       this.createSymbol(positionY, this.getRandomImageKey());
       positionY += this.paddingY;
     }
+  }
+
+  createTargetColumn(stripNumbers: Array<number>) {
+    let positionY = 0;
+    for (let index = 0; index < 3; index++) {
+      this.createSymbol(
+        positionY,
+        Object.values(symbolsData)[stripNumbers[index]].key
+      );
+      positionY += this.paddingY;
+    }
+  }
+
+  createSymbol(positionY: number, imageKey: string) {
+    const symbol = new Symbol(this.scene, 0, positionY, imageKey);
+    this.add(symbol);
   }
 
   getRandomImageKey() {

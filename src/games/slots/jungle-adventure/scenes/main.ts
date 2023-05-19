@@ -1,12 +1,15 @@
 import { Board } from "../components/board";
-import { Indicators } from "../ui/indicators";
+import { GameManager } from "../utils/gameManager";
+import { UiInterface } from "../ui/uiInterface";
 
 export class Main extends Phaser.Scene {
   screenWidth!: number;
   screenHeight!: number;
 
   board!: Board;
-  indicators!: Indicators;
+  uiInterface!: UiInterface;
+
+  gameManager!: GameManager;
 
   constructor() {
     super("Main");
@@ -19,8 +22,9 @@ export class Main extends Phaser.Scene {
     this.addBackground();
     this.addFrame();
 
+    this.gameManager = new GameManager(this);
     this.board = new Board(this, 260, 155);
-    this.indicators = new Indicators(this, 0, 0);
+    this.uiInterface = new UiInterface(this, 0, 0);
   }
 
   addBackground() {

@@ -1,14 +1,18 @@
+import { OptionsModal } from "../components/optionsModal";
 import { Main } from "../scenes/main";
 
-export class Indicators extends Phaser.GameObjects.Container {
+export class UiInterface extends Phaser.GameObjects.Container {
   spinButton!: Phaser.GameObjects.Image;
   increaseButton!: Phaser.GameObjects.Image;
   decreaseButton!: Phaser.GameObjects.Image;
+  optionsButton!: Phaser.GameObjects.Image;
+
+  optionsModal!: OptionsModal;
 
   screenWidth!: number;
   screenHeight!: number;
 
-  constructor(scene: Phaser.Scene, x: number, y: number) {
+  constructor(public scene: Main, x: number, y: number) {
     super(scene, x, y);
     this.scene.add.existing(this);
     this.init();
@@ -24,6 +28,28 @@ export class Indicators extends Phaser.GameObjects.Container {
     this.addDecreaseButton();
 
     this.addBetText();
+
+    this.addOptionsButton();
+    this.createOptionsModal();
+  }
+
+  createOptionsModal() {
+    this.optionsModal = new OptionsModal(this.scene, 0, 0);
+    this.optionsModal.setVisible(false);
+  }
+
+  addOptionsButton() {
+    this.optionsButton = this.scene.add
+      .image(2, 2, "options-icon")
+      .setOrigin(0)
+      .setScale(1.1)
+      .setInteractive({ cursor: "pointer" })
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.optionsModal.setVisible(true);
+        this.optionsButton.setVisible(false);
+
+        this.desableInterface();
+      });
   }
 
   addBetText() {

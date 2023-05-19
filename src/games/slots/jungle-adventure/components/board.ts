@@ -61,7 +61,7 @@ export class Board extends Phaser.GameObjects.Layer {
       duration: 150,
       y: 155,
       onComplete: () => {
-        this.createNextColumn(columnIndex);
+        this.createNextColumn(columnIndex, spinNumber);
         spinNumber -= 1;
         if (spinNumber > 0) {
           this.spinColumn(columnIndex, spinNumber);
@@ -73,14 +73,25 @@ export class Board extends Phaser.GameObjects.Layer {
     });
   }
 
-  createNextColumn(columnIndex: number) {
+  createNextColumn(columnIndex: number, spinNumber: number) {
     let posX = this.x;
     posX += this.paddingX * columnIndex + 1;
 
-    const column = this.createColumn(posX, this.y - 490);
-    column.setVisible(false);
-    this.nextColumns[columnIndex] = column;
-    this.allColumnsContainer.add(column);
+    if (spinNumber === 2) {
+      const column = this.createTargetColumn(
+        posX,
+        this.y - 490,
+        this.scene.gameManager.targetStrip[columnIndex]
+      );
+      column.setVisible(false);
+      this.nextColumns[columnIndex] = column;
+      this.allColumnsContainer.add(column);
+    } else {
+      const column = this.createColumn(posX, this.y - 490);
+      column.setVisible(false);
+      this.nextColumns[columnIndex] = column;
+      this.allColumnsContainer.add(column);
+    }
   }
 
   initNextColumns() {
@@ -103,10 +114,18 @@ export class Board extends Phaser.GameObjects.Layer {
   }
 
   createColumn(x: number, y: number) {
-    return new Column(this.scene, x, y);
+    return new Column(this.scene, x, y, true);
+  }
+
+  createTargetColumn(x: number, y: number, strip: Array<number>) {
+    const column = new Column(this.scene, x, y, false);
+    column.createTargetColumn(strip);
+    return column;
   }
 
   completeSpin() {
-    this.scene.indicators.enableInterface();
+    this.scene.uiInterface.enableInterface();
+    this.scene.gameManager.generateRandomTargetStrip();
+    this.scene.uiInterface.optionsModal.updateInputs();
   }
 }

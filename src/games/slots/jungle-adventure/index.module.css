@@ -1,7 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 .canvasContainer {
   position: absolute;
   width: 100vw;
   height: 100vh;
 
-  background-color: rgb(199, 199, 199);
+  background-color: rgb(7, 29, 7);
+}
+
+.options-background {
+  position: absolute;
+  width: 1200px !important;
+  height: 300px !important;
+  background-color: rgb(249, 211, 184) !important;
+
+  left: 0 !important;
+  right: 0 !important;
+
+  z-index: 1000 !important;
+
+  transform: rotate(40deg);
 }
