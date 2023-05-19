@@ -9,7 +9,7 @@ import Mines from "./games/pazzle/mines/index.tsx";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Router>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Mines />} />
       <Route
         path="/games/slots/jungle-adventure"
         element={<JunkgleAdventure />}
