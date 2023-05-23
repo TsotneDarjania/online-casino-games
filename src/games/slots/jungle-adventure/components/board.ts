@@ -1,3 +1,5 @@
+import { calculatePercentage } from "../../../../helper/tatukaMath";
+import { screenSize } from "../config/layutConfig";
 import { Main } from "../scenes/main";
 import { Column } from "./column";
 
@@ -5,32 +7,54 @@ export class Board extends Phaser.GameObjects.Layer {
   currentColumns: Array<Column> = [];
   nextColumns: Array<Column> = [];
 
-  paddingX = 160;
+  paddingX = 0;
+
+  width = 0;
+  height = 0;
 
   allColumnsContainer!: Phaser.GameObjects.Container;
 
   currentTween!: Phaser.Tweens.Tween;
   nextTween!: Phaser.Tweens.Tween;
 
-  constructor(public scene: Main, public x: number, public y: number) {
+  constructor(public scene: Main) {
     super(scene);
     this.init();
   }
 
   init() {
+    this.paddingX = calculatePercentage(13, this.scene.frame.displayWidth);
+
     this.initCurrentColumns();
     this.initNextColumns();
 
     this.allColumnsContainer = this.scene.add.container(0, 0);
     this.allColumnsContainer.add(this.currentColumns);
-    this.allColumnsContainer.add(this.nextColumns);
 
     const currentMask = this.scene.add.graphics();
-    currentMask.fillRect(0, 80, 1100, 490);
+    currentMask.fillRect(
+      this.scene.screenWidth / 2 -
+        this.allColumnsContainer.getBounds().width / 2,
+      this.scene.screenHeight / 2 -
+        this.allColumnsContainer.getBounds().height / 2 +
+        screenSize().frame.y,
+      this.allColumnsContainer.getBounds().width,
+      this.allColumnsContainer.getBounds().height
+    );
     this.allColumnsContainer.mask = new Phaser.Display.Masks.GeometryMask(
       this.scene,
       currentMask
     );
+
+    this.allColumnsContainer.setPosition(
+      this.scene.screenWidth / 2 -
+        this.allColumnsContainer.getBounds().width / 2,
+      this.scene.screenHeight / 2 -
+        this.allColumnsContainer.getBounds().height / 2 +
+        screenSize().frame.y
+    );
+
+    this.allColumnsContainer.add(this.nextColumns);
   }
 
   spinAllColumns() {
@@ -48,7 +72,7 @@ export class Board extends Phaser.GameObjects.Layer {
     this.currentTween = this.scene.add.tween({
       targets: this.currentColumns[columnIndex],
       duration: 150,
-      y: 630,
+      y: screenSize().board.currentTween.y,
       onComplete: () => {
         this.currentColumns[columnIndex].removeAll(true);
         this.currentColumns[columnIndex] = this.nextColumns[columnIndex];
@@ -59,7 +83,7 @@ export class Board extends Phaser.GameObjects.Layer {
     this.nextTween = this.scene.add.tween({
       targets: this.nextColumns[columnIndex],
       duration: 150,
-      y: 155,
+      y: 0,
       onComplete: () => {
         this.createNextColumn(columnIndex, spinNumber);
         spinNumber -= 1;
@@ -74,20 +98,23 @@ export class Board extends Phaser.GameObjects.Layer {
   }
 
   createNextColumn(columnIndex: number, spinNumber: number) {
-    let posX = this.x;
+    let posX = 0;
     posX += this.paddingX * columnIndex + 1;
 
     if (spinNumber === 2) {
       const column = this.createTargetColumn(
         posX,
-        this.y - 490,
+        screenSize().board.nextColumnPositionY,
         this.scene.gameManager.targetStrip[columnIndex]
       );
       column.setVisible(false);
       this.nextColumns[columnIndex] = column;
       this.allColumnsContainer.add(column);
     } else {
-      const column = this.createColumn(posX, this.y - 490);
+      const column = this.createColumn(
+        posX,
+        screenSize().board.nextColumnPositionY
+      );
       column.setVisible(false);
       this.nextColumns[columnIndex] = column;
       this.allColumnsContainer.add(column);
@@ -95,9 +122,12 @@ export class Board extends Phaser.GameObjects.Layer {
   }
 
   initNextColumns() {
-    let posX = this.x;
+    let posX = 0;
     for (let i = 0; i < 5; i++) {
-      const column = this.createColumn(posX, this.y - 490);
+      const column = this.createColumn(
+        posX,
+        screenSize().board.nextColumnPositionY
+      );
       column.setVisible(false);
       this.nextColumns[i] = column;
       posX += this.paddingX;
@@ -105,9 +135,9 @@ export class Board extends Phaser.GameObjects.Layer {
   }
 
   initCurrentColumns() {
-    let posX = this.x;
+    let posX = 0;
     for (let i = 0; i < 5; i++) {
-      const column = this.createColumn(posX, this.y);
+      const column = this.createColumn(posX, 0);
       this.currentColumns.push(column);
       posX += this.paddingX;
     }

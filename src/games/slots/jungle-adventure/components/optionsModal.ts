@@ -1,9 +1,16 @@
+import { calculatePercentage } from "../../../../helper/tatukaMath";
+import { screenSize } from "../config/layutConfig";
 import { Main } from "../scenes/main";
 
 export class OptionsModal {
   inputs: Array<Array<Phaser.GameObjects.DOMElement>> = [[], [], [], [], []];
   background!: Phaser.GameObjects.DOMElement;
   title!: Phaser.GameObjects.DOMElement;
+
+  allInputsContainer!: Phaser.GameObjects.Container;
+
+  width = 0;
+  height = 0;
 
   closeButtonItems: Array<Phaser.GameObjects.DOMElement> = [];
 
@@ -12,9 +19,11 @@ export class OptionsModal {
   }
 
   init() {
+    this.allInputsContainer = this.scene.add.container(0, 0);
+
     this.addBackground();
-    this.addTitle();
     this.addInputs();
+    this.addTitle();
 
     this.addCloseButton();
   }
@@ -30,17 +39,17 @@ export class OptionsModal {
 
   addCloseButton() {
     const closeButtonBackground = this.scene.add.dom(
-      816.5,
-      195,
+      this.scene.screenWidth - 50,
+      40,
       "div",
       "width : 55px; height : 55px;" +
-        "cursor : pointer; border:4px solid rgb(249, 211, 184); border-radius : 300px;  background-color: rgb(129, 56, 4)"
+        "cursor : pointer; border-radius : 300px;"
     );
 
     const closeButtonLine_1 = this.scene.add
       .dom(
-        820,
-        198,
+        this.scene.screenWidth - 50,
+        40,
         "div",
         "cursor : pointer; width: 57px; height : 4px; background-color: rgb(249, 211, 184);"
       )
@@ -48,8 +57,8 @@ export class OptionsModal {
 
     const closeButtonLine_2 = this.scene.add
       .dom(
-        820,
-        198,
+        this.scene.screenWidth - 50,
+        40,
         "div",
         "cursor : pointer; width: 57px; height : 4px; background-color: rgb(249, 211, 184);"
       )
@@ -102,10 +111,10 @@ export class OptionsModal {
   }
 
   addInputs() {
-    let posX = 410;
-    let posY = 260;
+    let posX = 0;
+    let posY = 0;
 
-    const padding = 80;
+    const padding = screenSize().interface.optionsModal.input.padding;
     for (let i = 0; i < this.scene.gameManager.targetStrip.length; i++) {
       for (let j = 0; j < 3; j++) {
         const input = this.scene.add
@@ -113,7 +122,13 @@ export class OptionsModal {
             posX,
             posY,
             "input",
-            "position: absolute; width:40px; height : 40px; text-align: center; font-size:28px;"
+            `position: absolute; width:${
+              screenSize().interface.optionsModal.input.width
+            }; height : ${
+              screenSize().interface.optionsModal.input.height
+            }; text-align: center; font-size:${
+              screenSize().interface.optionsModal.input.fontSize
+            };`
           )
           .setInteractive();
         input.setOrigin(0);
@@ -137,10 +152,23 @@ export class OptionsModal {
         posY += padding;
 
         this.inputs[i][j] = input;
+
+        this.allInputsContainer.add(input);
       }
-      posY = 260;
+      posY = 0;
       posX += padding;
     }
+
+    this.width =
+      this.inputs[0][0].width * 5 + (padding - this.inputs[0][0].width) * 4;
+
+    this.height =
+      this.inputs[0][0].height * 3 + (padding - this.inputs[0][0].height) * 2;
+
+    this.allInputsContainer.setPosition(
+      this.scene.screenWidth / 2 - this.width / 2,
+      this.scene.screenHeight / 2 - this.height / 2
+    );
   }
 
   addBackground() {
@@ -148,7 +176,7 @@ export class OptionsModal {
       this.x,
       this.y,
       "div",
-      " width : 1200px; height : 800px; background-color: rgb(0, 6, 2);" +
+      " width : 100vw; height : 100vh; background-color: rgb(0, 6, 2);" +
         " margin-left:auto; margin-right:auto; left:0; right:0; margin-top : auto; margin-bottom: auto; top: 0; bottom :0; z-index: -1;"
     );
     this.background.setOrigin(0);
@@ -157,14 +185,14 @@ export class OptionsModal {
 
   addTitle() {
     this.title = this.scene.add.dom(
-      this.x,
-      this.y,
+      this.scene.screenWidth / 2,
+      this.scene.screenHeight / 2 - calculatePercentage(90, this.height),
       "h2",
-      "text-align:center; width:1200px; margin-top:200px; color : rgb(235, 136, 31); font-family: 'Bebas Neue', sans-serif;" +
+      "color : rgb(235, 136, 31); font-family: 'Bebas Neue', sans-serif;" +
         " letter-spacing: 1px; ",
       "Choose the Next strip"
     );
 
-    this.title.setOrigin(0);
+    this.title.setOrigin(0.5);
   }
 }

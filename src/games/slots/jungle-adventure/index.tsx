@@ -5,6 +5,7 @@ import "../../helper/WebFontLoader";
 import style from "./index.module.css";
 import { Preload } from "./scenes/preload";
 import { Main } from "./scenes/main";
+import { screenSize } from "./config/layutConfig";
 
 const JunkgleAdventure = () => {
   const canvasContainer = useRef(null);
@@ -18,13 +19,16 @@ const JunkgleAdventure = () => {
         default: "arcade",
       },
       parent: canvasContainer.current,
-      type: Phaser.AUTO,
+      type: Phaser.WEBGL,
       scale: {
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1200,
-        height: 750,
+        mode: Phaser.Scale.NONE,
+
+        // mode: Phaser.Scale.FIT,
+        // autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: window.innerWidth,
+        height: window.innerHeight,
       },
-      backgroundColor: 0x2e2f30,
+      backgroundColor: 0xc322e3,
       scene: [Preload, Main],
     });
 

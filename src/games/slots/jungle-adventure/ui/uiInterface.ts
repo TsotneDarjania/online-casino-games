@@ -1,11 +1,15 @@
+import { calculatePercentage } from "../../../../helper/tatukaMath";
 import { OptionsModal } from "../components/optionsModal";
+import { screenSize } from "../config/layutConfig";
 import { Main } from "../scenes/main";
 
 export class UiInterface extends Phaser.GameObjects.Container {
+  background!: Phaser.GameObjects.Image;
   spinButton!: Phaser.GameObjects.Image;
   increaseButton!: Phaser.GameObjects.Image;
   decreaseButton!: Phaser.GameObjects.Image;
   optionsButton!: Phaser.GameObjects.Image;
+  betText!: Phaser.GameObjects.Text;
 
   optionsModal!: OptionsModal;
 
@@ -42,7 +46,10 @@ export class UiInterface extends Phaser.GameObjects.Container {
     this.optionsButton = this.scene.add
       .image(2, 2, "options-icon")
       .setOrigin(0)
-      .setScale(1.1)
+      .setDisplaySize(
+        screenSize().interface.optionsButton.width,
+        screenSize().interface.optionsButton.heiht
+      )
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         this.optionsModal.setVisible(true);
@@ -53,57 +60,82 @@ export class UiInterface extends Phaser.GameObjects.Container {
   }
 
   addBetText() {
-    this.scene.add
-      .text(130, this.screenHeight - 64, "0.10", {
+    this.betText = this.scene.add
+      .text(0, 0, "0.10", {
         align: "center",
         fontFamily: "mainfont",
         color: "white",
-        fontSize: "30px",
+        fontSize: screenSize().interface.betText.fontSize,
         fixedWidth: 120,
         fixedHeight: 30,
       })
-      .setVisible(false);
+      .setOrigin(0.5);
+
+    this.betText.setPosition(
+      screenSize().interface.betText.x,
+      this.increaseButton.y
+    );
   }
 
   addIncreaaseButton() {
     this.increaseButton = this.scene.add
-      .image(100, this.screenHeight - 50, "arrowButton")
-      .setScale(0.6)
+      .image(
+        screenSize().interface.increaseButton.x,
+        this.screenHeight - this.background.displayHeight / 2,
+        "arrowButton"
+      )
+      .setScale(screenSize().interface.increaseButton.scale)
       .setFlip(true, false)
-      .setVisible(false)
       .setInteractive({ cursor: "pointer" });
   }
 
   addDecreaseButton() {
     this.decreaseButton = this.scene.add
-      .image(280, this.screenHeight - 50, "arrowButton")
-      .setScale(0.6)
-      .setVisible(false)
+      .image(
+        screenSize().interface.decreaseButton.x,
+        this.screenHeight - this.background.displayHeight / 2,
+        "arrowButton"
+      )
+      .setScale(screenSize().interface.increaseButton.scale)
       .setInteractive({ cursor: "pointer" });
   }
 
   addBackground() {
-    const background = this.scene.add
-      .image(0, this.screenHeight - 105, "white")
-      .setDisplaySize(this.screenWidth, 105)
+    this.background = this.scene.add
+      .image(0, 0, "white")
+      .setDisplaySize(
+        this.screenWidth,
+        screenSize().interface.background.height
+      )
       .setOrigin(0)
-      .setAlpha(0.7)
+      .setAlpha(0.9)
       .setTint(0x3d291b);
 
-    this.add(background);
+    this.background.setPosition(
+      0,
+      this.screenHeight - this.background.displayHeight
+    );
+
+    this.add(this.background);
   }
 
   addSpinButton() {
     this.spinButton = this.scene.add
-      .image(this.screenWidth / 2, this.screenHeight - 50, "spinButton")
-      .setScale(0.9)
+      .image(this.screenWidth / 2, 0, "spinButton")
+      .setScale(screenSize().interface.spinButton.scale)
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         const scene = this.scene as Main;
         scene.board.spinAllColumns();
 
         this.desableInterface();
-      });
+      })
+      .setOrigin(0.5, 0.47);
+
+    this.spinButton.setPosition(
+      this.screenWidth / 2,
+      this.screenHeight - this.background.displayHeight / 2
+    );
 
     this.add(this.spinButton);
   }

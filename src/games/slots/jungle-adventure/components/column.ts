@@ -1,11 +1,15 @@
-import { getRandomFloat } from "../../../../helper/tatukaMath";
+import {
+  calculatePercentage,
+  getRandomFloat,
+} from "../../../../helper/tatukaMath";
 import { symbolsData } from "../data/symbolsData";
+import { Main } from "../scenes/main";
 import { Symbol } from "./symbol";
 
 export class Column extends Phaser.GameObjects.Container {
-  paddingY: number = 80;
+  paddingY = 80;
   constructor(
-    public scene: Phaser.Scene,
+    public scene: Main,
     x: number,
     y: number,
     public isRandom: boolean
@@ -15,6 +19,7 @@ export class Column extends Phaser.GameObjects.Container {
     this.init();
   }
   init() {
+    this.paddingY = calculatePercentage(8.5, this.scene.frame.displayHeight);
     this.isRandom && this.createRandomColumn();
   }
 
