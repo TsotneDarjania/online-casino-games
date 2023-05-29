@@ -22,8 +22,8 @@ export class Symbol extends Phaser.GameObjects.Container {
         this.key
       )
       .setDisplaySize(
-        calculatePercentage(10, this.scene.frame.displayWidth),
-        calculatePercentage(10, this.scene.frame.displayWidth)
+        calculatePercentage(9, this.scene.frame.displayWidth),
+        calculatePercentage(9, this.scene.frame.displayWidth)
       )
       .setOrigin(0.5);
     this.add(this.image);
@@ -33,8 +33,8 @@ export class Symbol extends Phaser.GameObjects.Container {
     this.rectangle = this.scene.add
       .image(this.x, this.y, "white")
       .setDisplaySize(
-        calculatePercentage(10, this.scene.frame.displayWidth),
-        calculatePercentage(10, this.scene.frame.displayWidth)
+        calculatePercentage(9, this.scene.frame.displayWidth),
+        calculatePercentage(9, this.scene.frame.displayWidth)
       )
       .setTint(0x331109)
       .setOrigin(0)

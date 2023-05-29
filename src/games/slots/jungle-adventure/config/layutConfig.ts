@@ -1,3 +1,5 @@
+import { calculatePercentage } from "../../../../helper/tatukaMath";
+
 export const layoutConfig = {
   desktop: {
     canvas: {
@@ -5,8 +7,8 @@ export const layoutConfig = {
       height: window.innerHeight,
     },
     frame: {
-      width: 1100,
-      heiht: 800,
+      widthPercent: 70,
+      heihtPercent: 90,
       y: 50,
     },
     interface: {
@@ -54,8 +56,8 @@ export const layoutConfig = {
       height: window.innerHeight,
     },
     frame: {
-      width: 680,
-      heiht: 440,
+      widthPercent: 90,
+      heihtPercent: 119,
       y: -30,
     },
     interface: {
@@ -100,6 +102,6 @@ export const layoutConfig = {
 };
 
 export const screenSize = () => {
-  if (window.innerWidth > 850) return layoutConfig.desktop;
+  if (window.innerWidth > 950) return layoutConfig.desktop;
   return layoutConfig.mobile;
 };
