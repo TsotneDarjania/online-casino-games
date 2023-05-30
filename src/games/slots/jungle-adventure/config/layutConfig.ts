@@ -1,5 +1,3 @@
-import { calculatePercentage } from "../../../../helper/tatukaMath";
-
 export const layoutConfig = {
   desktop: {
     canvas: {
@@ -19,11 +17,11 @@ export const layoutConfig = {
         scale: 0.8,
       },
       increaseButton: {
-        x: 100,
+        x: 300,
         scale: 0.7,
       },
       decreaseButton: {
-        x: 300,
+        x: 100,
         scale: 0.7,
       },
       betText: {
@@ -68,11 +66,11 @@ export const layoutConfig = {
         scale: 0.6,
       },
       increaseButton: {
-        x: 50,
+        x: 200,
         scale: 0.5,
       },
       decreaseButton: {
-        x: 200,
+        x: 50,
         scale: 0.5,
       },
       betText: {

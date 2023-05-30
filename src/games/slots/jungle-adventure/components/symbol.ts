@@ -14,6 +14,23 @@ export class Symbol extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
   }
 
+  playAnimation() {
+    this.scene.tweens.add({
+      targets: this.image,
+      yoyo: true,
+      duration: 150,
+      scale: 1.4,
+      repeat: 2,
+      onComplete: () => {
+        this.image.setTint(0xffffff);
+        this.rectangle.setTint(0x331109);
+      },
+    });
+
+    this.image.setTint(0xfab630);
+    this.rectangle.setTint(0x140804);
+  }
+
   createImage() {
     this.image = this.scene.add
       .image(

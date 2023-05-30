@@ -1,5 +1,5 @@
 import { Board } from "../components/board";
-import { GameManager } from "../utils/gameManager";
+import { GameManager } from "../core/gameManager";
 import { UiInterface } from "../ui/uiInterface";
 import { screenSize } from "../config/layutConfig";
 import { calculatePercentage } from "../../../../helper/tatukaMath";
@@ -59,10 +59,6 @@ export class Main extends Phaser.Scene {
         calculatePercentage(screenSize().frame.widthPercent, window.innerWidth),
         calculatePercentage(screenSize().frame.heihtPercent, window.innerHeight)
       );
-    // .setDisplaySize(
-    //   calculatePercentage(90, window.innerWidth),
-    //   calculatePercentage(110, window.innerHeight)
-    // );
   }
 
   addOrientationEvent() {

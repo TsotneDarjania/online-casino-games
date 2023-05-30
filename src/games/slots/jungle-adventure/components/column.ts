@@ -34,17 +34,19 @@ export class Column extends Phaser.GameObjects.Container {
   createTargetColumn(stripNumbers: Array<number>) {
     let positionY = 0;
     for (let index = 0; index < 3; index++) {
-      this.createSymbol(
+      const symbol = this.createSymbol(
         positionY,
         Object.values(symbolsData)[stripNumbers[index]].key
       );
       positionY += this.paddingY;
+      this.scene.gameManager.allTargetSymols.push(symbol);
     }
   }
 
   createSymbol(positionY: number, imageKey: string) {
     const symbol = new Symbol(this.scene, 0, positionY, imageKey);
     this.add(symbol);
+    return symbol;
   }
 
   getRandomImageKey() {

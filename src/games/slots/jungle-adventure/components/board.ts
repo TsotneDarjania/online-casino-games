@@ -155,7 +155,7 @@ export class Board extends Phaser.GameObjects.Layer {
 
   completeSpin() {
     this.scene.uiInterface.enableInterface();
-    this.scene.gameManager.generateRandomTargetStrip();
     this.scene.uiInterface.optionsModal.updateInputs();
+    this.scene.gameManager.completeSpin();
   }
 }
