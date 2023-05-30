@@ -1,4 +1,3 @@
-import { Scene } from "phaser";
 import { getRandomFloat } from "../../../../helper/tatukaMath";
 import { GameConfig, gameConfig } from "../config/gameConfig";
 import { symbolsData } from "../data/symbolsData";

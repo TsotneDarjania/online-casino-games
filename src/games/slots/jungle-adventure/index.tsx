@@ -5,7 +5,6 @@ import "../../helper/WebFontLoader";
 import style from "./index.module.css";
 import { Preload } from "./scenes/preload";
 import { Main } from "./scenes/main";
-import { screenSize } from "./config/layutConfig";
 
 const JunkgleAdventure = () => {
   const canvasContainer = useRef(null);
