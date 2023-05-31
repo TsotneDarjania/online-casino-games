@@ -39,6 +39,14 @@ export class Main extends Phaser.Scene {
     this.addOrientationEvent();
   }
 
+  update() {
+    if (this.game.scale.isLandscape) {
+      if (this.scale.isFullscreen === false) {
+        this.scale.startFullscreen();
+      }
+    }
+  }
+
   addBackground() {
     this.add
       .image(0, 0, "gameplayBackground")
