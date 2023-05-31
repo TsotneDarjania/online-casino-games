@@ -90,6 +90,6 @@ export const layoutConfig = {
 };
 
 export const screenSize = () => {
-  if (window.innerWidth > 850) return layoutConfig.desktop;
+  if (document.body.clientWidth > 850) return layoutConfig.desktop;
   return layoutConfig.mobile;
 };

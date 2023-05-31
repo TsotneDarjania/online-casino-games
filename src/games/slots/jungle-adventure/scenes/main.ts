@@ -56,8 +56,14 @@ export class Main extends Phaser.Scene {
       .setAlpha(1)
       .setOrigin(0.488, 0.4)
       .setDisplaySize(
-        calculatePercentage(screenSize().frame.widthPercent, window.innerWidth),
-        calculatePercentage(screenSize().frame.heihtPercent, window.innerHeight)
+        calculatePercentage(
+          screenSize().frame.widthPercent,
+          document.body.clientWidth
+        ),
+        calculatePercentage(
+          screenSize().frame.heihtPercent,
+          document.body.clientHeight
+        )
       );
   }
 

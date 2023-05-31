@@ -1,8 +1,8 @@
 export const layoutConfig = {
   desktop: {
     canvas: {
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: document.body.clientWidth,
+      height: document.body.clientHeight,
     },
     frame: {
       widthPercent: 70,
@@ -50,8 +50,8 @@ export const layoutConfig = {
   },
   mobile: {
     canvas: {
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: document.body.clientWidth,
+      height: document.body.clientHeight,
     },
     frame: {
       widthPercent: 90,
@@ -100,6 +100,6 @@ export const layoutConfig = {
 };
 
 export const screenSize = () => {
-  if (window.innerWidth > 950) return layoutConfig.desktop;
+  if (document.body.clientWidth > 950) return layoutConfig.desktop;
   return layoutConfig.mobile;
 };
