@@ -68,6 +68,12 @@ export class Main extends Phaser.Scene {
   }
 
   addOrientationEvent() {
+    if (this.game.scale.isPortrait) {
+      this.portraitWarning.setVisible(true);
+    } else {
+      this.portraitWarning.setVisible(false);
+    }
+
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
       this.scale.startFullscreen();
       if (this.game.scale.isPortrait) {
