@@ -12,6 +12,9 @@ const JunkgleAdventure = () => {
   useEffect(() => {
     if (!canvasContainer.current) return;
 
+    console.log(document.body.clientWidth);
+    console.log(document.body.clientHeight);
+
     const game = new Phaser.Game({
       dom: { createContainer: true },
       physics: {
