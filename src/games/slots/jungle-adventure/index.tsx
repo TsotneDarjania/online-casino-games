@@ -12,8 +12,8 @@ const JunkgleAdventure = () => {
   useEffect(() => {
     if (!canvasContainer.current) return;
 
-    console.log(document.body.scrollWidth);
-    console.log(document.body.scrollHeight);
+    console.log(document.body.offsetWidth);
+    console.log(document.body.offsetHeight);
 
     const game = new Phaser.Game({
       dom: { createContainer: true },
@@ -27,8 +27,8 @@ const JunkgleAdventure = () => {
 
         // mode: Phaser.Scale.FIT,
         // autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: document.body.scrollWidth,
-        height: document.body.scrollHeight,
+        width: document.body.offsetWidth,
+        height: document.body.offsetHeight,
       },
       backgroundColor: 0xc322e3,
       scene: [Preload, Main],
