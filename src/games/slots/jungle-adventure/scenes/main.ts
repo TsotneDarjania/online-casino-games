@@ -39,14 +39,6 @@ export class Main extends Phaser.Scene {
     this.addOrientationEvent();
   }
 
-  update() {
-    if (this.game.scale.isLandscape) {
-      if (this.scale.isFullscreen === false) {
-        this.scale.startFullscreen();
-      }
-    }
-  }
-
   addBackground() {
     this.add
       .image(0, 0, "gameplayBackground")
@@ -76,15 +68,8 @@ export class Main extends Phaser.Scene {
   }
 
   addOrientationEvent() {
-    if (this.game.scale.isPortrait) {
-      this.portraitWarning.setVisible(true);
-      this.scale.stopFullscreen();
-    } else {
-      this.portraitWarning.setVisible(false);
-      this.scale.startFullscreen();
-    }
-
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
+      this.scale.startFullscreen();
       if (this.game.scale.isPortrait) {
         this.portraitWarning.setVisible(true);
         this.scale.resize(this.game.canvas.height, this.game.canvas.width);
