@@ -15,8 +15,8 @@ const JunkgleAdventure = () => {
     // console.log(window.outerWidth);
     // console.log(window.outerHeight);
 
-    // const hideWidth = window.outerWidth - window.innerWidth;
-    // const hideHeight = window.outerHeight - window.innerHeight;
+    const hideWidth = window.outerWidth - window.innerWidth;
+    const hideHeight = window.outerHeight - window.innerHeight;
 
     const game = new Phaser.Game({
       dom: { createContainer: true },
@@ -29,9 +29,9 @@ const JunkgleAdventure = () => {
         mode: Phaser.Scale.NONE,
 
         // mode: Phaser.Scale.FIT,
-        // autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: document.body.offsetWidth,
-        height: document.body.offsetHeight,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: window.outerWidth,
+        height: window.innerHeight - hideHeight,
       },
       backgroundColor: 0xc322e3,
       scene: [Preload, Main],
