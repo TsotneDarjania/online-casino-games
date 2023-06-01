@@ -12,11 +12,8 @@ const JunkgleAdventure = () => {
   useEffect(() => {
     if (!canvasContainer.current) return;
 
-    // console.log(window.outerWidth);
-    // console.log(window.outerHeight);
-
-    const hideWidth = window.outerWidth - window.innerWidth;
-    const hideHeight = window.outerHeight - window.innerHeight;
+    // const hideWidth = window.outerWidth - window.innerWidth;
+    // const hideHeight = window.outerHeight - window.innerHeight;
 
     const game = new Phaser.Game({
       dom: { createContainer: true },
@@ -27,11 +24,10 @@ const JunkgleAdventure = () => {
       type: Phaser.WEBGL,
       scale: {
         mode: Phaser.Scale.NONE,
-
         // mode: Phaser.Scale.FIT,
         // autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: window.outerWidth - hideWidth,
-        height: window.outerHeight - hideHeight,
+        width: window.innerWidth,
+        height: window.innerHeight,
       },
       backgroundColor: 0xc322e3,
       scene: [Preload, Main],

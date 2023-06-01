@@ -3,8 +3,6 @@ import Mines from "./games/pazzle/mines";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import JunkgleAdventure from "./games/slots/jungle-adventure";
 
-console.log("app tsx");
-
 function App() {
   return (
     <Router>

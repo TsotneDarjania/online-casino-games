@@ -11,6 +11,9 @@ export class Main extends Phaser.Scene {
   board!: Board;
   uiInterface!: UiInterface;
   portraitWarning!: Phaser.GameObjects.Container;
+  pressToStart!: Phaser.GameObjects.Container;
+
+  as!: Phaser.GameObjects.Image;
 
   gameManager!: GameManager;
 
@@ -23,6 +26,10 @@ export class Main extends Phaser.Scene {
   create() {
     this.screenWidth = this.game.canvas.width;
     this.screenHeight = this.game.canvas.height;
+    this.pressToStart = this.add
+      .container(0, 0)
+      .setDepth(300)
+      .setVisible(false);
     this.portraitWarning = this.add
       .container(0, 0)
       .setDepth(200)
@@ -36,6 +43,7 @@ export class Main extends Phaser.Scene {
     this.uiInterface = new UiInterface(this, 0, 0);
 
     this.createPortraitWarning();
+    this.createPressToStartScreen();
     this.addOrientationEvent();
   }
 
@@ -67,11 +75,44 @@ export class Main extends Phaser.Scene {
       );
   }
 
+  createPressToStartScreen() {
+    const background = this.add
+      .image(0, 0, "white")
+      .setOrigin(0)
+      .setDisplaySize(this.screenWidth, this.screenHeight)
+      .setTint(0x1f2021);
+
+    this.pressToStart.add(background);
+
+    const text = this.add
+      .text(this.screenWidth / 2, this.screenHeight / 2, ["Press To Start"], {
+        align: "center",
+        fontSize: "20px",
+        color: "yellow",
+        lineSpacing: 20,
+        fixedWidth: calculatePercentage(90, this.screenWidth),
+      })
+      .setOrigin(0.5);
+
+    this.pressToStart.add(text);
+
+    this.pressToStart
+      .setInteractive(
+        new Phaser.Geom.Rectangle(0, 0, this.screenWidth, this.screenHeight),
+        Phaser.Geom.Rectangle.Contains
+      )
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.pressToStart.setVisible(false);
+        this.scale.startFullscreen();
+      });
+  }
+
   addOrientationEvent() {
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
-    } else {
-      this.portraitWarning.setVisible(false);
+    }
+    if (this.screenWidth < 800 || this.game.scale.isPortrait) {
+      this.pressToStart.setVisible(true);
     }
 
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
