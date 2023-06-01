@@ -113,7 +113,7 @@ export class Main extends Phaser.Scene {
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
     }
-    if (this.screenWidth < 800 || this.game.scale.isPortrait) {
+    if (this.screenWidth < 950 || this.game.scale.isPortrait) {
       this.pressToStart.setVisible(true);
     }
 

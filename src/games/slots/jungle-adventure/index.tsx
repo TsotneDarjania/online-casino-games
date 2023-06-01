@@ -12,6 +12,9 @@ const JunkgleAdventure = () => {
   useEffect(() => {
     if (!canvasContainer.current) return;
 
+    // console.log(window.outerWidth);
+    // console.log(window.outerHeight);
+
     // const hideWidth = window.outerWidth - window.innerWidth;
     // const hideHeight = window.outerHeight - window.innerHeight;
 
@@ -24,10 +27,11 @@ const JunkgleAdventure = () => {
       type: Phaser.WEBGL,
       scale: {
         mode: Phaser.Scale.NONE,
+
         // mode: Phaser.Scale.FIT,
         // autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: document.body.clientWidth,
+        height: document.body.clientHeight,
       },
       backgroundColor: 0xc322e3,
       scene: [Preload, Main],
