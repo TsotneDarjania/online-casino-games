@@ -105,6 +105,8 @@ export class Main extends Phaser.Scene {
         this.pressToStart.setVisible(false);
         this.scale.startFullscreen();
       });
+
+    //asd
   }
 
   addOrientationEvent() {
