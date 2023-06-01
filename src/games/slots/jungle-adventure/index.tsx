@@ -15,7 +15,7 @@ const JunkgleAdventure = () => {
     // console.log(window.outerWidth);
     // console.log(window.outerHeight);
 
-    const hideWidth = window.outerWidth - window.innerWidth;
+    // const hideWidth = window.outerWidth - window.innerWidth;
     const hideHeight = window.outerHeight - window.innerHeight;
 
     const game = new Phaser.Game({
