@@ -103,6 +103,7 @@ export class Main extends Phaser.Scene {
 
     if (this.isMobileDevice() && this.scale.isFullscreen === false) {
       this.pressToStart.setVisible(true);
+      console.log("aq vaaar");
     }
 
     this.pressToStart
@@ -111,9 +112,9 @@ export class Main extends Phaser.Scene {
         Phaser.Geom.Rectangle.Contains
       )
       .on(Phaser.Input.Events.POINTER_UP, () => {
-        this.changeOrientationSize();
-        this.scale.startFullscreen();
         this.pressToStart.setVisible(false);
+        this.scale.startFullscreen();
+        this.changeOrientationSize();
       });
   }
 
@@ -148,15 +149,19 @@ export class Main extends Phaser.Scene {
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
-      this.scene.restart();
+      // this.scene.restart();
     } else {
       this.portraitWarning.setVisible(false);
       this.scale.resize(this.game.canvas.height, this.game.canvas.width);
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
-      this.scene.restart();
+      //  this.scene.restart();
     }
+
+    this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+      this.scene.restart();
+    });
   }
 
   createPortraitWarning() {
