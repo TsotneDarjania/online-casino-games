@@ -25,6 +25,10 @@ export class Main extends Phaser.Scene {
   }
 
   create() {
+    this.scale.on(Phaser.Scale.Events.LEAVE_FULLSCREEN, () => {
+      this.changeCanvasSize();
+    });
+
     this.screenWidth = this.game.canvas.width;
     this.screenHeight = this.game.canvas.height;
     this.pressToStart = this.add
@@ -97,6 +101,10 @@ export class Main extends Phaser.Scene {
 
     this.pressToStart.add(text);
 
+    if (this.isMobileDevice()) {
+      this.pressToStart.setVisible(true);
+    }
+
     this.pressToStart
       .setInteractive(
         new Phaser.Geom.Rectangle(0, 0, this.screenWidth, this.screenHeight),
@@ -121,30 +129,31 @@ export class Main extends Phaser.Scene {
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
     }
-    if (this.isMobileDevice()) {
-      this.pressToStart.setVisible(true);
-    }
 
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
-      this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
-      this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
-
-      if (this.game.scale.isPortrait) {
-        this.portraitWarning.setVisible(true);
-        this.scale.resize(this.game.canvas.height, this.game.canvas.width);
-        this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
-
-        this.scale.removeAllListeners();
-        this.scene.restart();
-      } else {
-        this.portraitWarning.setVisible(false);
-        this.scale.resize(this.game.canvas.height, this.game.canvas.width);
-        this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
-
-        this.scale.removeAllListeners();
-        this.scene.restart();
-      }
+      this.changeCanvasSize();
     });
+  }
+
+  changeCanvasSize() {
+    this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
+    this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
+
+    if (this.game.scale.isPortrait) {
+      this.portraitWarning.setVisible(true);
+      this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+      this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
+
+      this.scale.removeAllListeners();
+      this.scene.restart();
+    } else {
+      this.portraitWarning.setVisible(false);
+      this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+      this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
+
+      this.scale.removeAllListeners();
+      this.scene.restart();
+    }
   }
 
   createPortraitWarning() {
