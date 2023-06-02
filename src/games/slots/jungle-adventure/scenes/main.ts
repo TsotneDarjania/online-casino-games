@@ -125,7 +125,7 @@ export class Main extends Phaser.Scene {
       this.portraitWarning.setVisible(true);
     }
     if (this.isMobileDevice()) {
-      //this.pressToStart.setVisible(true);
+      this.pressToStart.setVisible(true);
     }
 
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
