@@ -101,7 +101,7 @@ export class Main extends Phaser.Scene {
 
     this.pressToStart.add(text);
 
-    if (this.isMobileDevice()) {
+    if (this.isMobileDevice() && this.scale.isFullscreen === false) {
       this.pressToStart.setVisible(true);
     }
 
@@ -111,6 +111,7 @@ export class Main extends Phaser.Scene {
         Phaser.Geom.Rectangle.Contains
       )
       .on(Phaser.Input.Events.POINTER_UP, () => {
+        this.changeOrientationSize();
         this.scale.startFullscreen();
         this.pressToStart.setVisible(false);
       });
