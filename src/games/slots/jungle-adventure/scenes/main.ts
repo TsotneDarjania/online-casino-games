@@ -13,7 +13,8 @@ export class Main extends Phaser.Scene {
   portraitWarning!: Phaser.GameObjects.Container;
   pressToStart!: Phaser.GameObjects.Container;
 
-  as!: Phaser.GameObjects.Image;
+  canvasHideWidth = window.outerWidth - window.innerWidth;
+  canvasHideHeight = window.outerHeight - window.innerHeight;
 
   gameManager!: GameManager;
 
@@ -116,6 +117,9 @@ export class Main extends Phaser.Scene {
     }
 
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
+      this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
+      this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
+
       if (this.game.scale.isPortrait) {
         this.portraitWarning.setVisible(true);
         this.scale.resize(this.game.canvas.height, this.game.canvas.width);
