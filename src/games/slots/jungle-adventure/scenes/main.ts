@@ -26,7 +26,7 @@ export class Main extends Phaser.Scene {
 
   create() {
     this.scale.on(Phaser.Scale.Events.LEAVE_FULLSCREEN, () => {
-      // this.changeOrientationSize();
+      this.changeOrientationSize();
     });
 
     this.screenWidth = this.game.canvas.width;
