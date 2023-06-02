@@ -102,12 +102,9 @@ export class Main extends Phaser.Scene {
         new Phaser.Geom.Rectangle(0, 0, this.screenWidth, this.screenHeight),
         Phaser.Geom.Rectangle.Contains
       )
-      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+      .on(Phaser.Input.Events.POINTER_UP, () => {
         this.scale.startFullscreen();
-
-        if (this.scale.isFullscreen) {
-          this.pressToStart.setVisible(false);
-        }
+        this.pressToStart.setVisible(false);
       });
   }
 
