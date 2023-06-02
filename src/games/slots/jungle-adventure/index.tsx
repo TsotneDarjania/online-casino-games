@@ -30,7 +30,7 @@ const JunkgleAdventure = () => {
 
         // mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: window.innerWidth - hideWidth,
+        width: window.outerWidth - hideWidth,
         height: window.outerHeight - hideHeight - 100,
       },
       backgroundColor: 0xc322e3,
