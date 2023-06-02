@@ -67,11 +67,11 @@ export class Main extends Phaser.Scene {
       .setDisplaySize(
         calculatePercentage(
           screenSize().frame.widthPercent,
-          document.body.clientWidth
+          this.game.canvas.width
         ),
         calculatePercentage(
           screenSize().frame.heihtPercent,
-          document.body.clientHeight
+          this.game.canvas.height
         )
       );
   }
@@ -103,17 +103,29 @@ export class Main extends Phaser.Scene {
         Phaser.Geom.Rectangle.Contains
       )
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        this.pressToStart.setVisible(false);
         this.scale.startFullscreen();
+
+        if (this.scale.isFullscreen) {
+          this.pressToStart.setVisible(false);
+        }
       });
+  }
+
+  isMobileDevice() {
+    const userAgent = navigator.userAgent;
+
+    // Check if the user agent string contains any keywords indicating a mobile device
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      userAgent
+    );
   }
 
   addOrientationEvent() {
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
     }
-    if (this.screenWidth < 950 || this.game.scale.isPortrait) {
-      // this.pressToStart.setVisible(true);
+    if (this.isMobileDevice()) {
+      //this.pressToStart.setVisible(true);
     }
 
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {

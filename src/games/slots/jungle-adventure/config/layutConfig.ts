@@ -55,7 +55,7 @@ export const layoutConfig = {
     },
     frame: {
       widthPercent: 90,
-      heihtPercent: 119,
+      heihtPercent: 100,
       y: -30,
     },
     interface: {
