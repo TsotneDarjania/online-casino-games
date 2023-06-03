@@ -141,8 +141,9 @@ export class Main extends Phaser.Scene {
       this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
       this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
     } else {
-      this.game.canvas.height = window.outerWidth;
-      this.game.canvas.width = window.outerHeight;
+      alert("aq var");
+      this.game.canvas.height = window.outerWidth + this.canvasHideWidth;
+      this.game.canvas.width = window.outerHeight + this.canvasHideHeight;
     }
 
     if (this.game.scale.isPortrait) {
