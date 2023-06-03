@@ -122,8 +122,10 @@ export class Main extends Phaser.Scene {
       )
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
-
+        this.scale.removeAllListeners();
         this.scale.startFullscreen();
+
+        this.scene.restart();
       });
   }
 
@@ -150,6 +152,7 @@ export class Main extends Phaser.Scene {
   }
 
   changeOrientationSize(canvasWidth: number, canvasHeight: number) {
+    console.log("asd");
     this.game.canvas.height = canvasWidth;
     this.game.canvas.width = canvasHeight;
 
@@ -168,6 +171,7 @@ export class Main extends Phaser.Scene {
     }
 
     this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+      this.scale.removeAllListeners();
       this.scene.restart();
     });
   }
