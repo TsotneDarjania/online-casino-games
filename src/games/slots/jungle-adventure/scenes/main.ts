@@ -147,13 +147,13 @@ export class Main extends Phaser.Scene {
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
-      this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+      this.scale.setGameSize(this.game.canvas.height, this.game.canvas.width);
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
     } else {
       this.portraitWarning.setVisible(false);
-      this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+      this.scale.setGameSize(this.game.canvas.height, this.game.canvas.width);
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
