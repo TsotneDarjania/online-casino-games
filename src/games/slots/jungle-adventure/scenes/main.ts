@@ -132,8 +132,6 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        // this.scene.restart();
-
         this.scale.startFullscreen();
       });
   }
@@ -153,16 +151,16 @@ export class Main extends Phaser.Scene {
     }
 
     this.scale.on(Phaser.Scale.Events.ORIENTATION_CHANGE, () => {
-      this.changeOrientationSize();
+      this.changeOrientationSize(
+        window.outerWidth - this.canvasHideWidth,
+        window.outerHeight - this.canvasHideHeight
+      );
     });
   }
 
-  changeOrientationSize() {
-    // this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
-    // this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
-
-    this.game.canvas.height = window.outerWidth;
-    this.game.canvas.width = window.outerHeight;
+  changeOrientationSize(canvasWidth: number, canvasHeight: number) {
+    this.game.canvas.height = canvasWidth;
+    this.game.canvas.width = canvasHeight;
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
