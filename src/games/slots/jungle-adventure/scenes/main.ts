@@ -131,6 +131,8 @@ export class Main extends Phaser.Scene {
         this.scene.restart();
 
         this.scale.startFullscreen();
+
+        this.scene.restart();
       });
   }
 
