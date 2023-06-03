@@ -118,8 +118,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        this.game.canvas.height = outerWidth;
-        this.game.canvas.width = outerHeight;
+        this.game.canvas.height = canvasWidth;
+        this.game.canvas.width = canvasHeight;
 
         if (this.game.scale.isPortrait) {
           this.scale.resize(this.game.canvas.height, this.game.canvas.width);
@@ -151,8 +151,6 @@ export class Main extends Phaser.Scene {
             );
           }
         }, 1000);
-
-        // this.scale.startFullscreen();
 
         this.scene.restart();
       });
