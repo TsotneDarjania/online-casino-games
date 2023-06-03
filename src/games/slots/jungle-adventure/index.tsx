@@ -25,7 +25,8 @@ const JunkgleAdventure = () => {
       type: Phaser.WEBGL,
       scale: {
         // mode: Phaser.Scale.FIT,
-        mode: Phaser.Scale.NONE,
+        // mode: Phaser.Scale.NONE,
+        mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: window.outerWidth - hideWidth,
         height: window.outerHeight - hideHeight,
