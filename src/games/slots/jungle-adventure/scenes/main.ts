@@ -105,6 +105,10 @@ export class Main extends Phaser.Scene {
       this.pressToStart.setVisible(true);
     }
 
+    this.scale.on(Phaser.Scale.Events.ENTER_FULLSCREEN, () => {
+      this.pressToStart.setVisible(false);
+    });
+
     this.pressToStart
       .setInteractive(
         new Phaser.Geom.Rectangle(0, 0, this.screenWidth, this.screenHeight),
@@ -112,6 +116,9 @@ export class Main extends Phaser.Scene {
       )
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
+
+        this.scale.startFullscreen();
+
         this.game.canvas.height = window.outerWidth + this.canvasHideWidth;
         this.game.canvas.width = window.outerHeight + this.canvasHideHeight;
 
@@ -123,7 +130,7 @@ export class Main extends Phaser.Scene {
           this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
         }
 
-        this.scale.startFullscreen();
+        this.scene.restart();
       });
   }
 
