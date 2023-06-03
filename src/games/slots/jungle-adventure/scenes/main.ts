@@ -124,7 +124,10 @@ export class Main extends Phaser.Scene {
         this.pressToStart.setVisible(false);
         this.scale.removeAllListeners();
         this.scene.restart();
-        this.scale.startFullscreen();
+
+        setTimeout(() => {
+          this.scale.startFullscreen();
+        }, 1000);
       });
   }
 
