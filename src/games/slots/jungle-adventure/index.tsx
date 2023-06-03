@@ -29,6 +29,8 @@ const JunkgleAdventure = () => {
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: window.outerWidth - hideWidth,
         height: window.outerHeight - hideHeight,
+        //  width: window.outerWidth,
+        // height: window.outerHeight
       },
       backgroundColor: 0x111112,
       scene: [Preload, Main],
