@@ -109,6 +109,9 @@ export class Main extends Phaser.Scene {
       this.pressToStart.setVisible(false);
     });
 
+    alert(outerWidth);
+    alert(innerWidth);
+
     this.pressToStart
       .setInteractive(
         new Phaser.Geom.Rectangle(0, 0, this.screenWidth, this.screenHeight),
@@ -117,11 +120,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        const hideWidth = window.outerWidth - window.innerWidth;
-        const hideHeight = window.outerHeight - window.innerHeight;
-
-        this.game.canvas.height = innerWidth + hideWidth;
-        this.game.canvas.width = outerHeight + hideHeight;
+        this.game.canvas.height = outerHeight;
+        this.game.canvas.width = outerWidth;
 
         if (this.game.scale.isPortrait) {
           this.scale.resize(this.game.canvas.height, this.game.canvas.width);
