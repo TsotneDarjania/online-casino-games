@@ -132,6 +132,27 @@ export class Main extends Phaser.Scene {
 
         this.scale.startFullscreen();
 
+        setTimeout(() => {
+          this.game.canvas.height = outerWidth;
+          this.game.canvas.width = outerHeight;
+
+          if (this.game.scale.isPortrait) {
+            this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+            this.renderer.resize(
+              this.game.canvas.width,
+              this.game.canvas.height
+            );
+          } else {
+            this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+            this.renderer.resize(
+              this.game.canvas.width,
+              this.game.canvas.height
+            );
+          }
+        }, 1000);
+
+        // this.scale.startFullscreen();
+
         this.scene.restart();
       });
   }
