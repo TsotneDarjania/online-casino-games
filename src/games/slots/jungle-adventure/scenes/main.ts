@@ -176,8 +176,11 @@ export class Main extends Phaser.Scene {
   }
 
   changeOrientationSize() {
-    this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
-    this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
+    // this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
+    // this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
+
+    this.game.canvas.height = window.outerWidth;
+    this.game.canvas.width = window.outerHeight;
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
