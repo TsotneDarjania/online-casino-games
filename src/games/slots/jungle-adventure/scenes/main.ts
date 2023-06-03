@@ -109,8 +109,9 @@ export class Main extends Phaser.Scene {
       this.pressToStart.setVisible(false);
     });
 
-    alert(outerWidth);
-    alert(innerWidth);
+    console.log(window.screen.width);
+    // alert(outerWidth);
+    // alert(innerWidth);
 
     this.pressToStart
       .setInteractive(
@@ -120,8 +121,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        this.game.canvas.height = outerHeight;
-        this.game.canvas.width = outerWidth;
+        this.game.canvas.height = outerWidth;
+        this.game.canvas.width = outerHeight;
 
         if (this.game.scale.isPortrait) {
           this.scale.resize(this.game.canvas.height, this.game.canvas.width);
