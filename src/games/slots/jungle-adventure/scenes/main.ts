@@ -1,7 +1,7 @@
 import { Board } from "../components/board";
 import { GameManager } from "../core/gameManager";
 import { UiInterface } from "../ui/uiInterface";
-import { outerHeight, outerWidth, screenSize } from "../config/layutConfig";
+import { screenSize } from "../config/layutConfig";
 import { calculatePercentage } from "../../../../helper/tatukaMath";
 
 export class Main extends Phaser.Scene {
