@@ -1,3 +1,6 @@
+export const outerWidth = window.outerWidth;
+export const outerHeight = window.outerHeight;
+
 export const layoutConfig = {
   desktop: {
     canvas: {

@@ -1,7 +1,12 @@
 import { Board } from "../components/board";
 import { GameManager } from "../core/gameManager";
 import { UiInterface } from "../ui/uiInterface";
-import { screenSize } from "../config/layutConfig";
+import {
+  layoutConfig,
+  outerHeight,
+  outerWidth,
+  screenSize,
+} from "../config/layutConfig";
 import { calculatePercentage } from "../../../../helper/tatukaMath";
 
 export class Main extends Phaser.Scene {
@@ -117,10 +122,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        this.game.canvas.height =
-          window.outerWidth + this.canvasHideWidth + 200;
-        this.game.canvas.width =
-          window.outerHeight + this.canvasHideHeight + 200;
+        this.game.canvas.height = outerWidth;
+        this.game.canvas.width = outerHeight;
 
         if (this.game.scale.isPortrait) {
           this.scale.resize(this.game.canvas.height, this.game.canvas.width);
