@@ -108,6 +108,7 @@ export class Main extends Phaser.Scene {
     this.scale.on(Phaser.Scale.Events.ENTER_FULLSCREEN, () => {
       this.pressToStart.setVisible(false);
 
+      //asd
       // this.game.canvas.height = outerWidth;
       // this.game.canvas.width = outerHeight;
 
