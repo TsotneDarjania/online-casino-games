@@ -133,8 +133,8 @@ export class Main extends Phaser.Scene {
         this.scale.startFullscreen();
 
         setTimeout(() => {
-          this.game.canvas.height = outerWidth;
-          this.game.canvas.width = outerHeight;
+          this.game.canvas.height = innerWidth;
+          this.game.canvas.width = innerHeight;
 
           if (this.game.scale.isPortrait) {
             this.scale.resize(this.game.canvas.height, this.game.canvas.width);
