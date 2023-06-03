@@ -1,4 +1,5 @@
 import { calculatePercentage } from "../../../../helper/tatukaMath";
+import { screenSize } from "../config/layutConfig";
 import { Main } from "../scenes/main";
 
 export class Symbol extends Phaser.GameObjects.Container {
@@ -39,8 +40,14 @@ export class Symbol extends Phaser.GameObjects.Container {
         this.key
       )
       .setDisplaySize(
-        calculatePercentage(9, this.scene.frame.displayWidth),
-        calculatePercentage(9, this.scene.frame.displayWidth)
+        calculatePercentage(
+          screenSize().board.symbol.withPercent,
+          this.scene.frame.displayWidth
+        ),
+        calculatePercentage(
+          screenSize().board.symbol.heightPercent,
+          this.scene.frame.displayWidth
+        )
       )
       .setOrigin(0.5);
     this.add(this.image);
@@ -50,8 +57,14 @@ export class Symbol extends Phaser.GameObjects.Container {
     this.rectangle = this.scene.add
       .image(this.x, this.y, "white")
       .setDisplaySize(
-        calculatePercentage(9, this.scene.frame.displayWidth),
-        calculatePercentage(9, this.scene.frame.displayWidth)
+        calculatePercentage(
+          screenSize().board.symbol.withPercent,
+          this.scene.frame.displayWidth
+        ),
+        calculatePercentage(
+          screenSize().board.symbol.heightPercent,
+          this.scene.frame.displayWidth
+        )
       )
       .setTint(0x331109)
       .setOrigin(0)

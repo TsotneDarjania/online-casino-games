@@ -1,9 +1,3 @@
-const hideWidth = window.outerWidth - window.innerWidth;
-const hideHeight = window.outerHeight - window.innerHeight;
-
-export const outerWidth = window.outerWidth - hideWidth;
-export const outerHeight = window.outerHeight - hideHeight;
-
 export const layoutConfig = {
   desktop: {
     canvas: {
@@ -50,6 +44,10 @@ export const layoutConfig = {
     board: {
       currentTween: {
         y: 400,
+      },
+      symbol: {
+        withPercent: 9,
+        heightPercent: 9,
       },
       nextColumnPositionY: -400,
     },
@@ -98,9 +96,13 @@ export const layoutConfig = {
     },
     board: {
       currentTween: {
-        y: 240,
+        y: 200,
       },
-      nextColumnPositionY: -240,
+      symbol: {
+        withPercent: 7,
+        heightPercent: 7,
+      },
+      nextColumnPositionY: -200,
     },
   },
 };
