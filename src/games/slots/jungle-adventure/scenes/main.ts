@@ -112,8 +112,8 @@ export class Main extends Phaser.Scene {
       )
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
-        this.changeOrientationSize();
         this.scale.startFullscreen();
+        this.changeOrientationSize();
       });
   }
 
@@ -138,8 +138,8 @@ export class Main extends Phaser.Scene {
 
   changeOrientationSize() {
     if (this.scale.isFullscreen) {
-      this.game.canvas.height = window.outerWidth + this.canvasHideWidth;
-      this.game.canvas.width = window.outerHeight + this.canvasHideHeight;
+      this.game.canvas.height = 100;
+      this.game.canvas.width = 100;
     } else {
       this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
       this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
@@ -147,19 +147,28 @@ export class Main extends Phaser.Scene {
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
-      this.scale.setGameSize(this.game.canvas.height, this.game.canvas.width);
+      this.scale.resize(this.game.canvas.height, this.game.canvas.width);
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
     } else {
       this.portraitWarning.setVisible(false);
-      this.scale.setGameSize(this.game.canvas.height, this.game.canvas.width);
+      this.scale.resize(this.game.canvas.height, this.game.canvas.width);
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
     }
 
     this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+      if (this.scale.isFullscreen && this.scale.isLandscape) {
+        this.game.canvas.height = window.outerWidth + this.canvasHideWidth;
+        this.game.canvas.width = window.outerHeight + this.canvasHideHeight;
+
+        this.scale.resize(this.game.canvas.height, this.game.canvas.width);
+        this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
+
+        this.scale.removeAllListeners();
+      }
       this.scene.restart();
     });
   }
