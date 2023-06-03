@@ -123,9 +123,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
         this.scale.removeAllListeners();
-        this.scale.startFullscreen();
-
         this.scene.restart();
+        this.scale.startFullscreen();
       });
   }
 
