@@ -109,10 +109,6 @@ export class Main extends Phaser.Scene {
       this.pressToStart.setVisible(false);
     });
 
-    console.log(window.screen.width);
-    // alert(outerWidth);
-    // alert(innerWidth);
-
     this.pressToStart
       .setInteractive(
         new Phaser.Geom.Rectangle(0, 0, this.screenWidth, this.screenHeight),
@@ -135,8 +131,6 @@ export class Main extends Phaser.Scene {
         this.scene.restart();
 
         this.scale.startFullscreen();
-
-        this.scene.restart();
       });
   }
 
@@ -160,8 +154,8 @@ export class Main extends Phaser.Scene {
   }
 
   changeOrientationSize() {
-    this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
-    this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
+    // this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
+    // this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
