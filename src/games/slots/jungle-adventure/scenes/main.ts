@@ -113,10 +113,9 @@ export class Main extends Phaser.Scene {
       this.pressToStart.setVisible(false);
       setTimeout(() => {
         this.changeOrientationSize(window.outerWidth, window.outerHeight);
+        this.scale.removeAllListeners();
+        this.scene.restart();
       }, 1000);
-
-      this.scale.removeAllListeners();
-      this.scene.restart();
     });
 
     this.pressToStart
