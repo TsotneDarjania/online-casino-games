@@ -103,7 +103,6 @@ export class Main extends Phaser.Scene {
 
     if (this.isMobileDevice() && this.scale.isFullscreen === false) {
       this.pressToStart.setVisible(true);
-      console.log("aq vaaar");
     }
 
     this.pressToStart
@@ -138,10 +137,13 @@ export class Main extends Phaser.Scene {
   }
 
   changeOrientationSize() {
-    this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
-    this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
-
-    //if (this.scale.isFullscreen) this.scale.stopFullscreen();
+    if (this.scale.isFullscreen) {
+      this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
+      this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
+    } else {
+      this.game.canvas.height = window.outerWidth;
+      this.game.canvas.width = window.outerHeight;
+    }
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
@@ -149,14 +151,12 @@ export class Main extends Phaser.Scene {
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
-      // this.scene.restart();
     } else {
       this.portraitWarning.setVisible(false);
       this.scale.resize(this.game.canvas.height, this.game.canvas.width);
       this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
 
       this.scale.removeAllListeners();
-      //  this.scene.restart();
     }
 
     this.scale.on(Phaser.Scale.Events.RESIZE, () => {
