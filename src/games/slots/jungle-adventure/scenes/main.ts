@@ -118,6 +118,8 @@ export class Main extends Phaser.Scene {
         this.scale.resize(this.game.canvas.height, this.game.canvas.width);
         this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
       }
+
+      this.scene.restart();
     });
 
     this.pressToStart
