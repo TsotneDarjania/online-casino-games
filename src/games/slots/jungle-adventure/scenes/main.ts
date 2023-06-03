@@ -111,11 +111,7 @@ export class Main extends Phaser.Scene {
 
     this.scale.on(Phaser.Scale.Events.ENTER_FULLSCREEN, () => {
       this.pressToStart.setVisible(false);
-      setTimeout(() => {
-        this.changeOrientationSize(window.outerWidth, window.outerHeight);
-        this.scale.removeAllListeners();
-        this.scene.restart();
-      }, 100);
+      setTimeout(() => {}, 100);
     });
 
     this.pressToStart
@@ -125,6 +121,9 @@ export class Main extends Phaser.Scene {
       )
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
+        this.changeOrientationSize(window.outerWidth, window.outerHeight);
+        this.scale.removeAllListeners();
+        this.scene.restart();
         this.scale.startFullscreen();
       });
   }
