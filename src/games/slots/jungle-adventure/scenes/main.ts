@@ -119,7 +119,9 @@ export class Main extends Phaser.Scene {
         this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
       }
 
-      this.scene.restart();
+      setTimeout(() => {
+        this.scene.restart();
+      }, 1000);
     });
 
     this.pressToStart
