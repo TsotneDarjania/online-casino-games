@@ -117,8 +117,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        this.game.canvas.height = 300;
-        this.game.canvas.width = 300;
+        this.game.canvas.height = window.outerWidth + this.canvasHideWidth;
+        this.game.canvas.width = window.outerHeight + this.canvasHideHeight;
 
         if (this.game.scale.isPortrait) {
           this.scale.resize(this.game.canvas.height, this.game.canvas.width);
