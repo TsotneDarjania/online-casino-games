@@ -3,7 +3,6 @@ import { GameManager } from "../core/gameManager";
 import { UiInterface } from "../ui/uiInterface";
 import { screenSize } from "../config/layutConfig";
 import { calculatePercentage } from "../../../../helper/tatukaMath";
-import { canvasHeight, canvasWidth } from "..";
 
 export class Main extends Phaser.Scene {
   screenWidth!: number;
@@ -118,8 +117,8 @@ export class Main extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_UP, () => {
         this.pressToStart.setVisible(false);
 
-        this.game.canvas.height = canvasWidth;
-        this.game.canvas.width = canvasHeight;
+        this.game.canvas.height = outerWidth + innerWidth;
+        this.game.canvas.width = outerHeight + innerWidth;
 
         if (this.game.scale.isPortrait) {
           this.scale.resize(this.game.canvas.height, this.game.canvas.width);
@@ -132,25 +131,6 @@ export class Main extends Phaser.Scene {
         this.scene.restart();
 
         this.scale.startFullscreen();
-
-        setTimeout(() => {
-          this.game.canvas.height = canvasWidth;
-          this.game.canvas.width = canvasHeight;
-
-          if (this.game.scale.isPortrait) {
-            this.scale.resize(this.game.canvas.height, this.game.canvas.width);
-            this.renderer.resize(
-              this.game.canvas.width,
-              this.game.canvas.height
-            );
-          } else {
-            this.scale.resize(this.game.canvas.height, this.game.canvas.width);
-            this.renderer.resize(
-              this.game.canvas.width,
-              this.game.canvas.height
-            );
-          }
-        }, 1000);
 
         this.scene.restart();
       });
@@ -176,11 +156,8 @@ export class Main extends Phaser.Scene {
   }
 
   changeOrientationSize() {
-    // this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
-    // this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
-
-    this.game.canvas.height = window.outerWidth;
-    this.game.canvas.width = window.outerHeight;
+    this.game.canvas.height = window.outerWidth - this.canvasHideWidth;
+    this.game.canvas.width = window.outerHeight - this.canvasHideHeight;
 
     if (this.game.scale.isPortrait) {
       this.portraitWarning.setVisible(true);
