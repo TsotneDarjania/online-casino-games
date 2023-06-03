@@ -6,6 +6,9 @@ import style from "./index.module.css";
 import { Preload } from "./scenes/preload";
 import { Main } from "./scenes/main";
 
+export const canvasWidth = window.outerWidth;
+export const canvasHeight = window.outerHeight;
+
 const JunkgleAdventure = () => {
   const canvasContainer = useRef(null);
 

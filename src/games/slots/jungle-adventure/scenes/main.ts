@@ -3,6 +3,7 @@ import { GameManager } from "../core/gameManager";
 import { UiInterface } from "../ui/uiInterface";
 import { screenSize } from "../config/layutConfig";
 import { calculatePercentage } from "../../../../helper/tatukaMath";
+import { canvasHeight, canvasWidth } from "..";
 
 export class Main extends Phaser.Scene {
   screenWidth!: number;
@@ -133,8 +134,8 @@ export class Main extends Phaser.Scene {
         this.scale.startFullscreen();
 
         setTimeout(() => {
-          this.game.canvas.height = innerWidth;
-          this.game.canvas.width = innerHeight;
+          this.game.canvas.height = canvasWidth;
+          this.game.canvas.width = canvasHeight;
 
           if (this.game.scale.isPortrait) {
             this.scale.resize(this.game.canvas.height, this.game.canvas.width);
