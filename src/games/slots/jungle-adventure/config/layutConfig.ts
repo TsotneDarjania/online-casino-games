@@ -1,5 +1,8 @@
-export const outerWidth = window.outerWidth;
-export const outerHeight = window.outerHeight;
+const hideWidth = window.outerWidth - window.innerWidth;
+const hideHeight = window.outerHeight - window.innerHeight;
+
+export const outerWidth = window.outerWidth - hideWidth;
+export const outerHeight = window.outerHeight - hideHeight;
 
 export const layoutConfig = {
   desktop: {
