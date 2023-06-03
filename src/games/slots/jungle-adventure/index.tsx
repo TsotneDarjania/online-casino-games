@@ -21,6 +21,7 @@ const JunkgleAdventure = () => {
         default: "arcade",
       },
       parent: canvasContainer.current,
+      fullscreenTarget: canvasContainer.current,
       type: Phaser.WEBGL,
       scale: {
         // mode: Phaser.Scale.FIT,
